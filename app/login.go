@@ -2,6 +2,7 @@ package app
 
 import (
 	"github.com/gin-gonic/gin"
+	"hotel/utils/logging"
 )
 
 // User 登录验证信息
@@ -15,6 +16,7 @@ func Login() {
 	r := gin.Default()
 	//加载登录页面
 	r.LoadHTMLFiles("index.html")
+	logging.Infoln("log init success!")
 	// 反馈基本信息
 	r.GET("/index", func(c *gin.Context) {
 		c.JSON(

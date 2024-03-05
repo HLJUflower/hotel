@@ -1,6 +1,7 @@
 package global
 
 import (
+	"github.com/sirupsen/logrus"
 	"github.com/spf13/viper"
 	"hotel/config"
 )
@@ -9,6 +10,7 @@ import (
 type Application struct {
 	ConfigViper *viper.Viper
 	Config      config.Configuration
+	Logger      *logrus.Logger
 }
 
 // 启动项实例化
