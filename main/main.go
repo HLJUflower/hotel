@@ -2,6 +2,9 @@ package main
 
 import (
 	"hotel/app"
+	"hotel/bootstrap"
+	"hotel/config/sql"
+	"hotel/global"
 	"hotel/utils/logging"
 	"hotel/utils/times"
 	"time"
@@ -14,6 +17,8 @@ func init() {
 }
 
 func main() {
+	global.App.ConfigViper = bootstrap.InitConfig()
+	global.App.DB = sql.InitDB()
 	//时间矫正，更新日志
 	logging.Info("Set Time E8")
 	localTime := time.FixedZone("CST", 8*3600)

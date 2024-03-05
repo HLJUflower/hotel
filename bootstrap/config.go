@@ -12,11 +12,11 @@ import (
 
 func InitConfig() *viper.Viper {
 	//配置文件路径
-	config := "config.html"
+	config := "../config.yaml"
 	//初始化viper
 	v := viper.New()
 	v.SetConfigFile(config)
-	v.SetConfigType("yaml")
+	//v.SetConfigType("yaml")
 	//判断配置文件是否有错误
 	if err := v.ReadInConfig(); err != nil {
 		panic(fmt.Errorf("read config failed: %s \n", err))
