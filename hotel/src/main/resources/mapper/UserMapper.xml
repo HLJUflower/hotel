@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.zwb.mapper.UserMapper" >
+  
+  <select id="selectLogin" resultType="com.zwb.pojo.UserPo" parameterType="com.zwb.pojo.UserPo" >
+    Select * From users Where userName = #{userName} And password = #{password}
+  </select>
+
+  <select id="selectUserById" resultType="com.zwb.pojo.UserPo">
+   select * from users where id = #{id}
+  </select>
+
+  <select id="findIdByuserName" resultType="com.zwb.pojo.UserPo">
+   select * from users where userName = #{userName}
+  </select>
+  
+  
+</mapper>
