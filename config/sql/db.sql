@@ -96,8 +96,8 @@ INSERT INTO `hotel_role` VALUES (1, '王泽林', 'zl20040203','12345678910','ceo
 INSERT INTO `hotel_role` VALUES (2, '王泽林', 'zl20040203', '12345678910', 'leader', 2, '1', 1, '0', 'admin', '2024-01-01 00:00:01', '', NULL, '');
 INSERT INTO `hotel_role` VALUES (3, '王泽林', 'zl20040203', '12345678910', 'money', 3, '2', 1, '0', 'admin', '2024-01-01 00:00:01', '', NULL, '');
 INSERT INTO `hotel_role` VALUES (4, '王泽林', 'zl20040203', '12345678910', 'user_996', 4, '3', 1, '0', 'admin', '2024-01-01 00:00:01', '', NULL, '');
-INSERT INTO `hotel_role` VALUES (5, '王泽林', 'zl20040203', '12345678910', 'user_007', 5, '4', 1, '0', 'admin', '2024-01-01 00:00:01', '', NULL, '');
-INSERT INTO `hotel_role` VALUES (6, '王泽林', 'zl20040203', '12345678910', 'clean', 6, '4', 1, '0', 'admin', '2024-01-01 00:00:01', '', NULL, '');
+INSERT INTO `hotel_role` VALUES (5, '王泽林', 'zl20040203', '12345678910', 'user_007', 4, '4', 1, '0', 'admin', '2024-01-01 00:00:01', '', NULL, '');
+INSERT INTO `hotel_role` VALUES (6, '王泽林', 'zl20040203', '12345678910', 'clean', 4, '4', 1, '0', 'admin', '2024-01-01 00:00:01', '', NULL, '');
 COMMIT;
 
 CREATE TABLE IF NOT EXISTS `sleep_user` (
