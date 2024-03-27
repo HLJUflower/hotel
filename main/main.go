@@ -33,6 +33,7 @@ func main() {
 		global.App.DB.Close()
 		logging.Info("SQL CLOSED")
 	}()
+	os.Setenv("FYNE_FONT", "./msyh.ttf")
 	//时间矫正，更新日志
 	logging.Info("Set Time E8")
 	localTime := time.FixedZone("CST", 8*3600)

@@ -24,11 +24,11 @@ type User struct {
 func Select() {
 	//新建登录页
 	w := global.A.NewWindow("Hotel")
-	wid, hig := 900, 600
+	wid, hig := 960, 1080
 	w.Resize(fyne.NewSize(float32(wid), float32(hig)))
 	//enroll 注册页面组件
 	//标题
-	text := canvas.NewText("enroll", color.White)
+	text := canvas.NewText("Enroll", color.White)
 	text.Alignment = fyne.TextAlignCenter
 	text.TextSize = 40
 	textlayout := container.New(layout.NewGridLayout(3), mySpace, text, mySpace)
@@ -124,7 +124,7 @@ func Select() {
 					" ",
 					loginuserlogin.LoginTime,
 				)
-				w.Close()
+				//w.Close()
 				Index(realuserlogin)
 			} else {
 				dialog.ShowInformation("Login Error", "Wrong username or password!", w)
@@ -296,3 +296,7 @@ func Select() {
 //	//global.App.DB.Table("hotel_role").Create(&newuser)
 //	//return
 //}
+//114515,588 Massage the back with essential oils 888801,8888,588,1,admin,2024-01-01 00:00:01,"",,OK
+//114516,888 Massage the back with essential oils 888802,8888,888,1,admin,2024-01-01 00:00:02,"",,OK
+//114517,888 Massage the back with essential oils 666601,6666,888,1,admin,2024-01-01 00:00:03,"",,OK
+//114518,1288 Massage the back with essential oils 666602,6666,1288,1,admin,2024-01-01 00:00:04,"",,OK

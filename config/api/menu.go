@@ -7,7 +7,7 @@ import (
 )
 
 type Menu struct {
-	menuId     int       `json:"menu_Id" gorm:"menu_id"`
+	menuId     int       `json:"menu_id" gorm:"menu_id"`
 	ServeName  string    `json:"serve_name" gorm:"serve_name"`
 	Room       string    `json:"room" gorm:"room"`
 	Money      string    `json:"money" gorm:"money"`
