@@ -68,11 +68,11 @@ func roomCreate(u api.HotelRole) *fyne.Container {
 func roomDelete(u api.HotelRole) *fyne.Container {
 	mySpace := layout.NewSpacer()
 
-	del_room := widget.NewLabel("Del_RoomID : ")
-	del_roomempty := widget.NewEntry()
-	del_roomempty.SetPlaceHolder("Del_RoomID")
-	del_roomlayout := container.New(layout.NewGridLayout(5), mySpace, del_room, mySpace, del_roomempty, mySpace)
-	del_roomlay := container.New(layout.NewGridLayout(1), mySpace, del_roomlayout, mySpace)
+	delRoom := widget.NewLabel("Del_RoomID : ")
+	delRoomempty := widget.NewEntry()
+	delRoomempty.SetPlaceHolder("Del_RoomID")
+	delRoomlayout := container.New(layout.NewGridLayout(5), mySpace, delRoom, mySpace, delRoomempty, mySpace)
+	delRoomlay := container.New(layout.NewGridLayout(1), mySpace, delRoomlayout, mySpace)
 
 	userName := widget.NewLabel("userName : ")
 	userNameempty := widget.NewEntry()
@@ -88,7 +88,7 @@ func roomDelete(u api.HotelRole) *fyne.Container {
 
 	roomDelete := widget.NewButton("Delete", func() {
 		room := api.Rooms{}
-		global.App.DB.Table("room").Where("room_id = ?", del_roomempty.Text).Find(&room)
+		global.App.DB.Table("room").Where("room_id = ?", delRoomempty.Text).Find(&room)
 		room.Status = "1"
 		room.DelFlag = "2"
 		room.UpdateTime = time.Now()
@@ -98,7 +98,7 @@ func roomDelete(u api.HotelRole) *fyne.Container {
 
 	roomDeletelayout := container.New(layout.NewGridLayout(5), mySpace, mySpace, roomDelete, mySpace, mySpace)
 
-	roomDeletelay := container.New(layout.NewGridLayout(1), del_roomlay, userNamelay, userPasswordlay, mySpace, roomDeletelayout, mySpace)
+	roomDeletelay := container.New(layout.NewGridLayout(1), delRoomlay, userNamelay, userPasswordlay, mySpace, roomDeletelayout, mySpace)
 
 	return roomDeletelay
 }
@@ -175,7 +175,7 @@ func roomShow(u api.HotelRole) {
 
 }
 
-// RoomInsert 房间增删改查
+// Room RoomInsert 房间增删改查
 func Room(u api.HotelRole) *fyne.Container {
 	tab := container.NewAppTabs(
 		container.NewTabItem("Show", container.New(layout.NewGridLayout(1), roomCreate(u))),
