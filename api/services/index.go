@@ -38,7 +38,7 @@ func Index(u api.HotelRole) {
 		//退房
 		//container.NewTabItem("Register", container.New()),
 		//房间
-		//container.NewTabItem("Register", container.New()),
+		container.NewTabItem("Register", container.New(layout.NewGridLayout(1), middleware.Room(u))),
 	)
 	tab.SetTabLocation(container.TabLocationLeading)
 	w.SetContent(tab)

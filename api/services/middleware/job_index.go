@@ -11,8 +11,7 @@ import (
 	"time"
 )
 
-// JobPlan 季度计划
-func JobPlan(u api.HotelRole) *fyne.Container {
+func jobtext01() *fyne.Container {
 	var mySpace = layout.NewSpacer()
 	tk := api.Task{}
 	tks := make([]api.Task, 10)
@@ -50,7 +49,7 @@ func JobPlan(u api.HotelRole) *fyne.Container {
 			return num + 2, 5
 		},
 		func() fyne.CanvasObject {
-			return widget.NewLabel("Past Plans")
+			return widget.NewLabel("Past Plans : ")
 		},
 		func(i widget.TableCellID, o fyne.CanvasObject) {
 			o.(*widget.Label).SetText(tkss[i.Row][i.Col])
@@ -63,4 +62,68 @@ func JobPlan(u api.HotelRole) *fyne.Container {
 	list.SetColumnWidth(4, 260)
 	joblayout := container.New(layout.NewGridLayout(1), tklayout, list)
 	return joblayout
+}
+
+func jobtext02(u api.HotelRole) *fyne.Container {
+	var mySpace = layout.NewSpacer()
+
+	jobName := widget.NewLabel("JobName : ")
+	jobNameempty := widget.NewEntry()
+	jobNameempty.SetPlaceHolder("JobName")
+	jobNamelayout := container.New(layout.NewGridLayout(5), mySpace, jobName, mySpace, jobNameempty, mySpace)
+	jobNamelay := container.New(layout.NewGridLayout(1), mySpace, jobNamelayout, mySpace)
+
+	jobGroup := widget.NewLabel("JobGroup : ")
+	jobGroupempty := widget.NewEntry()
+	jobGroupempty.SetPlaceHolder("JobGroup")
+	jobGrouplayout := container.New(layout.NewGridLayout(5), mySpace, jobGroup, mySpace, jobGroupempty, mySpace)
+	jobGrouplay := container.New(layout.NewGridLayout(1), mySpace, jobGrouplayout, mySpace)
+
+	jobDetail := widget.NewLabel("JobDetail : ")
+	jobDetailempty := widget.NewEntry()
+	jobDetailempty.SetPlaceHolder("JobDetail")
+	jobDetaillayout := container.New(layout.NewGridLayout(5), mySpace, jobDetail, mySpace, jobDetailempty, mySpace)
+	jobDetaillay := container.New(layout.NewGridLayout(1), mySpace, jobDetaillayout, mySpace)
+
+	status := widget.NewLabel("Status : ")
+	statusempty := widget.NewEntry()
+	statusempty.SetPlaceHolder("Status")
+	statuslayout := container.New(layout.NewGridLayout(5), mySpace, status, mySpace, statusempty, mySpace)
+	statuslay := container.New(layout.NewGridLayout(1), mySpace, statuslayout, mySpace)
+
+	remark := widget.NewLabel("Remark : ")
+	remarkempty := widget.NewEntry()
+	remarkempty.SetPlaceHolder("Remark")
+	remarklayout := container.New(layout.NewGridLayout(5), mySpace, remark, mySpace, remarkempty, mySpace)
+	remarklay := container.New(layout.NewGridLayout(1), mySpace, remarklayout, mySpace)
+
+	jobCreate := widget.NewButton("Create", func() {
+		job := api.Task{}
+		job.JobName = jobNameempty.Text
+		job.JobDetail = jobDetailempty.Text
+		job.JobGroup = jobGroupempty.Text
+		job.Status = statusempty.Text
+		job.Remark = remarkempty.Text
+		job.CreateTime = time.Now()
+		job.CreateBy = u.RoleName
+		global.App.DB.Table("task").Create(&job)
+	})
+
+	jobCreatelayout := container.New(layout.NewGridLayout(5), mySpace, mySpace, jobCreate, mySpace, mySpace)
+
+	joblayout := container.New(layout.NewGridLayout(1), jobNamelay, jobGrouplay, jobDetaillay, statuslay, remarklay, mySpace, jobCreatelayout, mySpace)
+
+	return joblayout
+}
+
+// JobPlan 季度计划
+func JobPlan(u api.HotelRole) *fyne.Container {
+
+	tab := container.NewAppTabs(
+		container.NewTabItem("Show", container.New(layout.NewGridLayout(1), jobtext01())),
+		container.NewTabItem("Create", container.New(layout.NewGridLayout(1), jobtext02(u))),
+	)
+	tab.SetTabLocation(container.TabLocationTop)
+	ans := container.New(layout.NewGridLayout(1), tab)
+	return ans
 }

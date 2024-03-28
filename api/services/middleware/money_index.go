@@ -60,7 +60,12 @@ func MoneyTotal(u api.HotelRole) *fyne.Container {
 		list.SetColumnWidth(2, 260)
 		list.SetColumnWidth(3, 100)
 		list.SetColumnWidth(4, 100)
-		moneylayout := container.New(layout.NewGridLayout(1), list)
+
+		total := widget.NewLabel("Total Money : ")
+		money := widget.NewLabel(strconv.Itoa(sum) + " RMB ")
+		totallay := container.New(layout.NewGridLayout(5), mySpace, total, mySpace, money, mySpace)
+		totallayout := container.New(layout.NewGridLayout(1), mySpace, totallay, mySpace)
+		moneylayout := container.New(layout.NewGridLayout(1), totallayout, list)
 		return moneylayout
 	} else {
 		always := canvas.NewText("Sorry, You Don't Have Enough Permissions", color.White)
