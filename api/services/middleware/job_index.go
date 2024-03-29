@@ -1,7 +1,6 @@
 package middleware
 
 import (
-	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
@@ -30,7 +29,6 @@ func jobtext01() *fyne.Container {
 		tkss[i][2] = tks[i].JobDetail
 		tkss[i][3] = tks[i].Remark
 		tkss[i][4] = tks[i].Status
-		fmt.Println(1)
 		global.App.DB.Table("task").Where("create_time < ?", now).First(&tk)
 		if tk == tks[i] {
 			num = i

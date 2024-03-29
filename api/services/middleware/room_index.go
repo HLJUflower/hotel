@@ -1,6 +1,7 @@
 package middleware
 
 import (
+	"fmt"
 	"fyne.io/fyne/v2"
 	"fyne.io/fyne/v2/container"
 	"fyne.io/fyne/v2/layout"
@@ -171,16 +172,99 @@ func roomUpdate(u api.HotelRole) *fyne.Container {
 	return roomlayout
 }
 
-func roomShow(u api.HotelRole) {
+func roomShow(u api.HotelRole) *fyne.Container {
+	var mySpace = layout.NewSpacer()
+	tks := make([]api.Rooms, 100)
+	tkss1, tkss2 := make([][5]string, 100), make([][5]string, 100)
+	num1, num2 := 1, 1
 
+	tkss1[0][0] = "RoomId"
+	tkss1[0][1] = "Leader"
+	tkss1[0][2] = "Phone"
+	tkss1[0][3] = "Remark"
+	tkss1[0][4] = "Status"
+
+	tkss2[0][0] = "RoomId"
+	tkss2[0][1] = "Leader"
+	tkss2[0][2] = "Phone"
+	tkss2[0][3] = "Remark"
+	tkss2[0][4] = "Status"
+
+	global.App.DB.Table("rooms").Where("del_flag = ?", "0").Find(&tks)
+
+	for i := 0; i < len(tks); i++ {
+		if tks[num1].Status == "0" && num1 <= 5 {
+			tkss1[num1][0] = strconv.FormatInt(tks[i].RoomId, 10)
+			tkss1[num1][1] = tks[i].Leader
+			tkss1[num1][2] = tks[i].Phone
+			tkss1[num1][3] = tks[i].Remark
+			tkss1[num1][4] = tks[i].Status
+			fmt.Println(tkss1[num1])
+			num1++
+		} else if tks[num1].Status == "1" && num2 <= 5 {
+			tkss2[num2][0] = strconv.FormatInt(tks[i].RoomId, 10)
+			tkss2[num2][1] = tks[i].Leader
+			tkss2[num2][2] = tks[i].Phone
+			tkss2[num2][3] = tks[i].Remark
+			tkss2[num2][4] = tks[i].Status
+			num2++
+		}
+	}
+
+	tkpb := widget.NewLabel("available room : ")
+	tklay := container.New(layout.NewGridLayout(2), tkpb, mySpace)
+	tklayout := container.New(layout.NewGridLayout(1), mySpace, tklay, mySpace)
+	list1 := widget.NewTable(
+		func() (int, int) {
+			return num1 + 2, 5
+		},
+		func() fyne.CanvasObject {
+			return widget.NewLabel("available room : ")
+		},
+		func(i widget.TableCellID, o fyne.CanvasObject) {
+			o.(*widget.Label).SetText(tkss1[i.Row][i.Col])
+		},
+	)
+	list1.SetColumnWidth(0, 160)
+	list1.SetColumnWidth(1, 160)
+	list1.SetColumnWidth(2, 260)
+	list1.SetColumnWidth(3, 260)
+	list1.SetColumnWidth(4, 260)
+	joblayout1 := container.New(layout.NewGridLayout(1), tklayout, list1)
+
+	tkpb2 := widget.NewLabel("fixing room : ")
+	tklay2 := container.New(layout.NewGridLayout(2), tkpb2, mySpace)
+	tklayout2 := container.New(layout.NewGridLayout(1), mySpace, tklay2, mySpace)
+	list2 := widget.NewTable(
+		func() (int, int) {
+			return num2 + 2, 5
+		},
+		func() fyne.CanvasObject {
+			return widget.NewLabel("fixing room : ")
+		},
+		func(i widget.TableCellID, o fyne.CanvasObject) {
+			o.(*widget.Label).SetText(tkss2[i.Row][i.Col])
+		},
+	)
+	list1.SetColumnWidth(0, 160)
+	list1.SetColumnWidth(1, 160)
+	list1.SetColumnWidth(2, 260)
+	list1.SetColumnWidth(3, 260)
+	list1.SetColumnWidth(4, 260)
+	joblayout2 := container.New(layout.NewGridLayout(1), tklayout2, list2)
+
+	joblayout := container.New(layout.NewGridLayout(1), joblayout1, joblayout2)
+
+	return joblayout
 }
 
-// Room RoomInsert 房间增删改查
+// Room 房间增删改查
 func Room(u api.HotelRole) *fyne.Container {
 	tab := container.NewAppTabs(
-		container.NewTabItem("Show", container.New(layout.NewGridLayout(1), roomCreate(u))),
-		container.NewTabItem("Create", container.New(layout.NewGridLayout(1), roomDelete(u))),
+		container.NewTabItem("Create", container.New(layout.NewGridLayout(1), roomCreate(u))),
+		container.NewTabItem("Delete", container.New(layout.NewGridLayout(1), roomDelete(u))),
 		container.NewTabItem("Update", container.New(layout.NewGridLayout(1), roomUpdate(u))),
+		container.NewTabItem("Show", container.New(layout.NewGridLayout(1), roomShow(u))),
 	)
 	tab.SetTabLocation(container.TabLocationTop)
 	ans := container.New(layout.NewGridLayout(1), tab)
