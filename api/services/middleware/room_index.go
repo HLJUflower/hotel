@@ -140,10 +140,6 @@ func roomUpdate(u api.HotelRole) *fyne.Container {
 	roomUpdate := widget.NewButton("Update", func() {
 		room := api.Rooms{}
 		global.App.DB.Table("room").Where("room_id = ?", roomID.Text).Find(&room)
-		if roomIDempty.Text != "" {
-			roomids, _ := strconv.Atoi(roomIDempty.Text)
-			room.RoomId = int64(roomids)
-		}
 		if leaderempty.Text != "" {
 			room.Leader = leaderempty.Text
 		}

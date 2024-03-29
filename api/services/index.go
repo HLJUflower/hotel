@@ -30,7 +30,7 @@ func Index(u api.HotelRole) {
 		//财务报表
 		container.NewTabItem("Money", container.New(layout.NewGridLayout(1), middleware.MoneyTotal(u))),
 		//客户管理
-		//container.NewTabItem("Client", container.New()),
+		container.NewTabItem("Client", container.New(layout.NewGridLayout(1), middleware.SleepUserLog(u))),
 		//人员管理
 		//container.NewTabItem("Manage", container.New()),
 		//历史记录
