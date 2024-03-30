@@ -23,8 +23,6 @@ func Index(u api.HotelRole) {
 	w.Resize(fyne.NewSize(float32(wid), float32(hig)))
 
 	tab := container.NewAppTabs(
-		//预定或登记
-		//container.NewTabItem("Register", container.New()),
 		//季度计划
 		container.NewTabItem("Plan", container.New(layout.NewGridLayout(1), middleware.JobPlan(u))),
 		//财务报表
@@ -32,11 +30,7 @@ func Index(u api.HotelRole) {
 		//客户管理
 		container.NewTabItem("Client", container.New(layout.NewGridLayout(1), middleware.SleepUserLog(u))),
 		//人员管理
-		//container.NewTabItem("Manage", container.New()),
-		//历史记录
-		//container.NewTabItem("History", container.New()),
-		//退房
-		//container.NewTabItem("Register", container.New()),
+		container.NewTabItem("Manage", container.New(layout.NewGridLayout(1), middleware.User(u))),
 		//房间
 		container.NewTabItem("Register", container.New(layout.NewGridLayout(1), middleware.Room(u))),
 	)

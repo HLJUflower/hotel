@@ -33,11 +33,17 @@ func sleepUserCreate(u api.HotelRole) *fyne.Container {
 	statuslayout := container.New(layout.NewGridLayout(5), mySpace, status, mySpace, statusempty, mySpace)
 	statuslay := container.New(layout.NewGridLayout(1), mySpace, statuslayout, mySpace)
 
-	remark := widget.NewLabel("sleep_userID : ")
+	remark := widget.NewLabel("sleep_roomID : ")
 	remarkempty := widget.NewEntry()
-	remarkempty.SetPlaceHolder("sleep_userID")
+	remarkempty.SetPlaceHolder("sleep_roomID")
 	remarklayout := container.New(layout.NewGridLayout(5), mySpace, remark, mySpace, remarkempty, mySpace)
 	remarklay := container.New(layout.NewGridLayout(1), mySpace, remarklayout, mySpace)
+
+	createTime := widget.NewLabel("create_time : ")
+	createTimeempty := widget.NewEntry()
+	createTimeempty.SetPlaceHolder("create_time")
+	createTimelayout := container.New(layout.NewGridLayout(5), mySpace, createTime, mySpace, createTimeempty, mySpace)
+	createTimelay := container.New(layout.NewGridLayout(1), mySpace, createTimelayout, mySpace)
 
 	sleepUsercreate := widget.NewButton("Create", func() {
 		sleepUser := api.SleepUser{}
@@ -53,7 +59,7 @@ func sleepUserCreate(u api.HotelRole) *fyne.Container {
 
 	sleepUsercreatelayout := container.New(layout.NewGridLayout(5), mySpace, mySpace, sleepUsercreate, mySpace, mySpace)
 
-	sleepUserlayout := container.New(layout.NewGridLayout(1), roleNamelay, phonelay, statuslay, remarklay, mySpace, sleepUsercreatelayout, mySpace)
+	sleepUserlayout := container.New(layout.NewGridLayout(1), roleNamelay, phonelay, statuslay, remarklay, createTimelay, mySpace, sleepUsercreatelayout, mySpace)
 
 	return sleepUserlayout
 }
